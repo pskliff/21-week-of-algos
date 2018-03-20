@@ -11,6 +11,6 @@ All the results will be written every week in **Log.md**
   * Create new folders every week and upload your solutions for current week in it  
   
 
-**You can skip 1 week out of 8 with no penalty**
-**I won't merge pull requests for the previeous weeks**
+**You can skip 1 week out of 8 with no penalty**  
+**(I won't merge pull requests for the previeous weeks)**
   
