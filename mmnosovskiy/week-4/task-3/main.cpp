@@ -42,16 +42,11 @@ int main()
                 prefixes[len] += 1;
             }
 
-            auto it = prefixes.cbegin();
-            while (it != prefixes.cend())
-                ++it;
-            if (it == prefixes.cend())
-            {
-                if (!prefixes.empty())
-                    res += prefixes.rbegin()->first + 1;
-                else
-                    res += 1;
-            }
+            if (!prefixes.empty())
+                res += prefixes.rbegin()->first + 1;
+            else
+                res += 1;
+
         }
         else
         {
