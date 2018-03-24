@@ -34,7 +34,6 @@
 # cmake files
 **/CMakeLists.txt
 **/cmake-build-debug/
-**/main.cpp
 
 # intellij idea
 **/.idea/
