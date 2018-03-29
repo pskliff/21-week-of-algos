@@ -1,20 +1,15 @@
-//
-// Created by Lucky13 on 23.03.2018.
-//
-
-#include <iostream>
 #include <fstream>
 #include <cmath>
 
 double f(double x, double c, double k, double m)
 {
-    return 49 / 2. * (x * x) + x * (7 * c - 5 * k) - m;
+    return 49 / 2. * (x * x) + x * (7 * c - 5 * k - 3.5) - m;
 }
 
 double findRoot(double c1, double k, double m)
 {
     int n = 0;
-    double a = -(7 * c1 - 5 * k) / 2 / 49 * 2., b = 1000000000, c, eps = 0.01;
+    double a = -(7 * c1 - 5 * k - 3.5) / 2 / 49 * 2., b = 1000000001, c, eps = 0.0001;
     do
     {
         c = (a + b) / 2;
@@ -58,12 +53,13 @@ int main()
     else
     {
         n = findRoot(i, k, m);
+        n = n < 1 ? n : n - 1;
         auto weeks = (unsigned long long) n;
-        rest += (weeks * 5 * k) - (weeks * 7 * (2 * i + weeks * 7) / 2);
+        rest += (weeks * 5 * k) - (weeks * 7 * (i + weeks * 7 + i - 1) / 2);
         i += weeks * 7;
         while (rest >= 0)
         {
-            if (d != 6 && d != 7)
+            if (d % 7 != 6 && d % 7 != 0)
                 rest += k;
             rest -= i++;
             ++d;

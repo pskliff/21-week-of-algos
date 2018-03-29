@@ -1,6 +1,4 @@
-#include <iostream>
 #include <fstream>
-#include <iomanip>
 
 int main()
 {
@@ -19,8 +17,11 @@ int main()
     for (int i = 0; i < N; ++i)
         full_prob += a[i] * b[i];
 
+    fout << std::fixed;
+    fout.precision(12);
+
     for (int j = 0; j < N; ++j)
-        fout << std::fixed << std::setprecision(12) << a[j] * b[j] / full_prob << std::endl;
+        fout << a[j] * b[j] / full_prob << std::endl;
 
     fin.close();
     fout.close();

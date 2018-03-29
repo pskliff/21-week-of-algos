@@ -1,79 +1,41 @@
-//
-// Created by Lucky13 on 23.03.2018.
-//
-
 using namespace std;
 
-#include <iostream>
 #include <fstream>
-#include <set>
-#include <list>
+#include <vector>
+#include <queue>
 
-list<set<int>> kerbosh(int**&a, int SIZE)
+const char NONE = -1, LEFT = 0, RIGHT = 1;
+const unsigned int MAXN = static_cast<const int>(5e3);
+unsigned int N, M;
+vector<int> parts[2];
+vector<char> part;
+bool graph[MAXN][MAXN];
+
+bool bfs(int start, char currentPart)
 {
-    set<int> M, G, K, P;
-    list <set<int>> RESULT;
-    for (int i = 0; i < SIZE; i++)
+    queue<int> q;
+    parts[part[start] = currentPart].push_back(start);
+    q.push(start);
+    while (!q.empty())
     {
-        K.insert(i);
-    }
-    int v, Count = 0, cnt = 0;
-    int Stack1[100];
-    set<int> Stack2[100];
-    set<int>::iterator theIterator;
-    theIterator = K.begin();
-    while (!K.empty() || !M.empty())
-    {
-        if (!K.empty())
+        int cur = q.front();
+        q.pop();
+        for (int i = 0; i < N; ++i)
         {
-            theIterator = K.begin();
-            v = *theIterator;
-            Stack2[++Count] = M;
-            Stack2[++Count] = K;
-            Stack2[++Count] = P;
-            Stack1[++cnt] = v;
-            M.insert(v);
-            for (int i = 0; i < SIZE; i++)
+            if (i == cur || graph[i][cur])
+                continue;
+            if (part[i] != NONE)
             {
-                if (!a[v][i])
-                {
-                    theIterator = K.find(i);
-                    if (theIterator != K.end())
-                    {
-                        K.erase(theIterator);
-                    }
-                    theIterator = P.find(i);
-                    if (theIterator != P.end())
-                    {
-                        P.erase(theIterator);
-                    }
-                }
+                if (part[i] == part[cur])
+                    return false;
+                continue;
             }
-            theIterator = K.find(v);
-            if (theIterator != K.end())
-            {
-                K.erase(theIterator);
-            }
-        }
-        else
-        {
-            if (P.empty())
-            {
-                RESULT.emplace_back(M);
-            }
-            v = Stack1[cnt--];
-            P = Stack2[Count--];
-            K = Stack2[Count--];
-            M = Stack2[Count--];
-            theIterator = K.find(v);
-            if (theIterator != K.end())
-            {
-                K.erase(theIterator);
-            }
-            P.insert(v);
+            char p = (part[cur] == LEFT) ? RIGHT : LEFT;
+            parts[part[i] = p].push_back(i);
+            q.push(i);
         }
     }
-    return RESULT;
+    return true;
 }
 
 int main()
@@ -81,41 +43,44 @@ int main()
     std::ifstream fin("input.txt", std::ios::in);
     std::ofstream fout("output.txt", std::ios::out);
 
-    int N, M;
-
     fin >> N >> M;
-
-    int** a = new int* [N];
-    for (int i = 0; i < N; ++i)
-        a[i] = new int[N]{0};
+    part = vector<char>(N, NONE);
 
     for (int i = 0; i < M; ++i)
     {
-        int from, to;
-        fin >> from >> to;
-        a[from - 1][to - 1] = a[to - 1][from - 1] = 1;
+        int to, from;
+        fin >> to >> from;
+        --to;
+        --from;
+        graph[to][from] = graph[from][to] = true;
     }
 
-    list <set<int>> res = kerbosh(a, N);
-
-    if (res.size() > 2)
-        fout << -1;
-    else if (res.size() == 2)
+    bool success = true;
+    char currentPart = LEFT;
+    for (int i = 0; i < N; ++i)
     {
-        int s = res.begin()->size();
-        fout << s << endl;
-        for (auto &el : *res.begin())
-            fout << el + 1 << " ";
+        if (part[i] == NONE)
+        {
+            success = bfs(i, currentPart);
+            if (!success)
+                break;
+            currentPart = (currentPart == LEFT) ? RIGHT : LEFT;
+        }
+    }
+
+    if (success)
+    {
+        int size = parts[0].size();
+        fout << size << endl;
+        for (int i = 0; i < size; ++i)
+            fout << parts[0][i] + 1 << " ";
         fout << endl;
-        for (auto &el : *res.rbegin())
-            fout << el + 1 << " ";
+        size = parts[1].size();
+        for (int i = 0; i < size; ++i)
+            fout << parts[1][i] + 1 << " ";
     }
     else
-    {
-        fout << 1 << endl << 1 << endl;
-        for (int i = 2; i <= N; ++i)
-            fout << i << " ";
-    }
+        fout << -1;
 
     fin.close();
     fout.close();

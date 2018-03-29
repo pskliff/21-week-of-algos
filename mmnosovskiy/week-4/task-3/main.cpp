@@ -1,20 +1,6 @@
-//
-// Created by Lucky13 on 23.03.2018.
-//
-
-#include <iostream>
 #include <fstream>
-#include <map>
-#include <set>
-
-int getMaxPrefix(const std::string &w1, const std::string &w2)
-{
-    int i = 0;
-    int s1 = w1.size(), s2 = w2.size();
-    while (i < s1 && i < s2 && w1[i] == w2[i])
-        ++i;
-    return i;
-}
+#include <unordered_map>
+#include <unordered_set>
 
 int main()
 {
@@ -24,7 +10,8 @@ int main()
     int N;
     fin >> N;
 
-    std::set<std::string> dict;
+    std::unordered_set<std::string> dict;
+    std::unordered_map<std::string, int> prefixes;
     int res = 0;
 
     for (int i = 0; i < N; ++i)
@@ -33,25 +20,29 @@ int main()
         fin >> word;
         if (dict.find(word) != dict.end())
         {
-            std::map<int, int> prefixes;
-            for (auto &w : dict)
+            std::string prefix;
+            int len = word.size();
+            int j;
+            for (j = 0; j < len - 1; ++j)
             {
-                if (w == word)
-                    continue;
-                int len = getMaxPrefix(word, w);
-                prefixes[len] += 1;
+                prefix += word[j];
+                if (prefixes.find(prefix) != prefixes.end())
+                    if (prefixes[prefix] == 1 && dict.find(prefix) == dict.end())
+                        break;
             }
-
-            if (!prefixes.empty())
-                res += prefixes.rbegin()->first + 1;
-            else
-                res += 1;
-
+            res += j + 1;
         }
         else
         {
-            res += word.size();
+            std::string prefix;
+            int len = word.size();
+            for (int j = 0; j < len - 1; ++j)
+            {
+                prefix += word[j];
+                prefixes[prefix] += 1;
+            }
             dict.insert(word);
+            res += word.size();
         }
     }
 

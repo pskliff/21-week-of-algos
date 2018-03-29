@@ -2,7 +2,6 @@
 // Created by Lucky13 on 23.03.2018.
 //
 
-#include <iostream>
 #include <fstream>
 #include <unordered_map>
 #include <vector>
