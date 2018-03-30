@@ -1,56 +1,109 @@
 //
-// Created by Stas Don on 23/03/2018.
+// Created by Stas Don on 29/03/2018.
 //
 
 #include <iostream>
 #include <vector>
+#include <map>
 #include <set>
-#include <unordered_set>
 
 using namespace std;
+
+int howManyRectsInARow(int n) {
+    return n*(n + 1)/2;
+}
+
+struct CompX {
+    bool operator()(const pair<int, int> &a, const pair<int, int> &b) {
+        if (a.first == b.first)
+            return a.second > b.second;
+        return a.first > b.first;
+    }
+};
+
+
+struct CompY{
+    bool operator()(const pair<int, int> &a, const pair<int, int> &b)
+    {
+        if(a.second == b.second)
+            return a.first > b.first;
+        return a.second > b.second;
+    }
+};
+
 
 int main()
 {
     int n;
     cin >> n;
+    vector<pair<int, int>> points(n);
 
-    int number_of_clicks = 0;
+    set<pair<int, int>, CompX> sort_x;
+    set<pair<int, int>, CompY> sort_y;
+//    map<int, int, CompX> sort_x;
+//    map<int, int, CompY> sort_y;
 
-    unordered_set<string> words;
 
     for (int i = 0; i < n; ++i) {
-        string word;
-        cin>>word;
-        if(words.find(word) == words.end())//если не было такого слова
-        {
-            words.insert(word);
-            number_of_clicks += word.size();
-        }
-        else//если было такое слово
-        {
-            set<int> prefixes;//prefix_len
-            for(auto it: words)
-            {
-                if(it != word)
-                {
-                    int prefix_len = 0;
-                    while(prefix_len < it.size() && prefix_len < word.size() && it[prefix_len] == word[prefix_len])
-                        ++prefix_len;
-
-                    if(prefixes.find(prefix_len) == prefixes.end())
-                        prefixes.insert(prefix_len);
-
-                    if(prefix_len == word.size())
-                        break;
-                }
-            }
-
-            int max_prefix = *(--prefixes.end());
-            if(max_prefix == word.size())
-                number_of_clicks += word.size();
-            else
-                number_of_clicks += max_prefix + 1;
-        }
+        int x, y;
+        cin >> x >> y;
+//        sort_x[x] = y;
+//        sort_y[x] = y;
+        sort_x.insert({x, y});
+        sort_y.insert({x, y});
     }
-    cout << number_of_clicks;
+
+//    for(auto p: sort_x)
+//        cout << p.first << " " << p.second << endl;
+//    cout<<endl;
+//
+//    for(auto p: sort_y)
+//        cout << p.first << " " << p.second << endl;
+//
+//    auto test = sort_y.find({4, 1});
+//    cout<<endl<<test->first << " " << test->second;
+//    ++test;
+//    cout<<endl<<test->first << " " << test->second;
+//    ++test;
+//    cout<<endl<<test->first << " " << test->second;
+//    ++test;
+//    cout<<endl<<test->first << " " << test->second;
+
+
+    int general_count = 0;
+
+    for(auto point = sort_x.begin(); point != sort_x.end() && point != sort_y.end() ;)
+    {
+//        cout<<"ENTERED: " << point->first << " " << point->second << endl;
+
+        auto eq_x = ++sort_x.find({point->first, point->second});
+        auto eq_y_start = ++sort_y.find({point->first, point->second});
+
+        auto eq_y = eq_y_start;
+
+        int count = 0;
+
+        while(eq_x != sort_x.end() &&  eq_x->first == point->first)
+        {
+//            cout<<"EQ_X: " << eq_x->first << " " << eq_x->second << endl;
+
+            eq_y = eq_y_start;
+            while(eq_y != sort_y.end() &&  eq_y->second == point->second)
+            {
+//                cout<<"EQ_Y: " << eq_y->first << " " << eq_y->second << endl;
+                if(sort_x.find({eq_y->first, eq_x->second}) != sort_x.end())
+                {
+                    ++count;
+                }
+                ++eq_y;
+            }
+            ++eq_x;
+            general_count += howManyRectsInARow(count);
+        }
+        point = eq_y;
+    }
+
+    cout << general_count;
+
+
 }
