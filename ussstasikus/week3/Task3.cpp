@@ -98,9 +98,9 @@ int main()
                 ++eq_y;
             }
             ++eq_x;
-            general_count += howManyRectsInARow(count);
         }
         point = eq_y;
+        general_count += howManyRectsInARow(count);
     }
 
     cout << general_count;
