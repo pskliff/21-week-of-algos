@@ -8,14 +8,18 @@ int main()
     std::string s1, s2, res;
     fin >> s1 >> s2;
 
-    int size1 = s1.size();
-    bool second_str[255];
-    for (char i : s2)
-        second_str[i] = true;
-    for (int i = 0; i < size1; ++i)
+    int size1 = s1.size(), size2 = s2.size();
+
+    int i = 0, j = 0;
+
+    while (i < size1 && j < size2)
     {
-        if (!second_str[s1[i]])
-            res += s1[i];
+        while (i < size1 && s1[i] < s2[j])
+            res += s1[i++];
+        while (i < size1 && j < size2 && s1[i] == s2[j])
+            ++i;
+        while (j < size2 && s1[i] > s2[j])
+            ++j;
     }
 
     if (!res.empty())
