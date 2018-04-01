@@ -26,10 +26,18 @@ Thoughts: I'm able to pass skype interview in Yandex
 
 [Link to work](https://github.com/pskliff/21-weeks-of-algos/tree/master/pskliff/week2)  
   
-## Week 1 March 18 - March 25
+## Week 3 March 26 - April 1
 
-Week's Progress: ...
+Week's Progress: Done all tasks
 
-Thoughts: ...
+Thoughts: **Special attention**  *to tasks 2 and 3* — done with Vserosnik help
 
-Link to work: ...
+Link to work: [Link to work](https://github.com/pskliff/21-weeks-of-algos/tree/master/pskliff/week3)  
+  
+## Week 4 March 18 - March 25
+
+Week's Progress: Done all tasks
+
+Thoughts: **Special attention**  *to tasks 5 and 6* — done with Vserosnik help
+
+Link to work: [Link to work](https://github.com/pskliff/21-weeks-of-algos/tree/master/pskliff/week4)
