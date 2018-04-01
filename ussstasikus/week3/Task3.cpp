@@ -1,7 +1,3 @@
-//
-// Created by Stas Don on 29/03/2018.
-//
-
 #include <iostream>
 #include <vector>
 #include <map>
@@ -9,98 +5,121 @@
 
 using namespace std;
 
-int howManyRectsInARow(int n) {
-    return n*(n + 1)/2;
-}
+typedef pair<double, double> point;
+
+struct Point
+{
+public:
+    Point(double x, double y): X(x), Y(y)
+    {};
+    Point()
+    {};
+    double X, Y;
+
+};
+
+struct Line
+{
+public:
+    Line(double a, double b, double c): A(a), B(b), C(c)
+    {};
+
+    double A, B, C;
+
+};
 
 struct CompX {
-    bool operator()(const pair<int, int> &a, const pair<int, int> &b) {
-        if (a.first == b.first)
-            return a.second > b.second;
-        return a.first > b.first;
+    bool operator()(const Point &a, const Point &b) {
+
+        if(a.X == b.X)
+            return a.Y < b.Y;
+        return a.X < b.X;
     }
 };
 
 
-struct CompY{
-    bool operator()(const pair<int, int> &a, const pair<int, int> &b)
+Line makeLine(const Point &p1, const Point &p2)
+{
+    return Line(p1.Y - p2.Y, p2.X - p1.X, p1.X*p2.Y - p1.Y*p2.X);
+}
+
+Line makeNormal(const Line &l, const Point &p)
+{
+
+    return Line(-l.B, l.A, l.B*p.X - l.A*p.Y);
+}
+
+bool isOnTheLine(const Point &p, const Line &l)
+{
+    return (l.A * p.X + l.B * p.Y + l.C) == 0;
+}
+
+vector<Point> findPointsOnNormal(Line normal, set<Point, CompX>::iterator it, set<Point, CompX>::iterator end)
+{
+    vector<Point> res;
+    ++it;
+    while(it != end)
     {
-        if(a.second == b.second)
-            return a.first > b.first;
-        return a.second > b.second;
+        if(isOnTheLine(*it, normal))
+            res.emplace_back(*it);
+        ++it;
     }
-};
+    return res;
+}
 
+Point cross(const Line &n1,  const Line &n2)
+{
+    Point cross_point;
+    cross_point.X = -(n1.C * n2.B - n2.C * n1.B)/(n1.A * n2.B - n1.B * n2.A);
+    cross_point.Y = -(n1.A * n2.C - n2.A * n1.C)/(n1.A * n2.B - n1.B * n2.A);
+    return cross_point;
+}
+
+bool isCrossExist(const Line &n1,  const Line &n2, set<Point, CompX> &points)
+{
+    return points.find(cross(n1, n2)) != points.end();
+}
 
 int main()
 {
     int n;
     cin >> n;
-    vector<pair<int, int>> points(n);
 
-    set<pair<int, int>, CompX> sort_x;
-    set<pair<int, int>, CompY> sort_y;
-//    map<int, int, CompX> sort_x;
-//    map<int, int, CompY> sort_y;
-
-
+    set<Point, CompX> sort_x;
+    int id = 0;
     for (int i = 0; i < n; ++i) {
-        int x, y;
+        double x, y;
         cin >> x >> y;
-//        sort_x[x] = y;
-//        sort_y[x] = y;
         sort_x.insert({x, y});
-        sort_y.insert({x, y});
+
     }
-
-//    for(auto p: sort_x)
-//        cout << p.first << " " << p.second << endl;
-//    cout<<endl;
-//
-//    for(auto p: sort_y)
-//        cout << p.first << " " << p.second << endl;
-//
-//    auto test = sort_y.find({4, 1});
-//    cout<<endl<<test->first << " " << test->second;
-//    ++test;
-//    cout<<endl<<test->first << " " << test->second;
-//    ++test;
-//    cout<<endl<<test->first << " " << test->second;
-//    ++test;
-//    cout<<endl<<test->first << " " << test->second;
-
 
     int general_count = 0;
 
-    for(auto point = sort_x.begin(); point != sort_x.end() && point != sort_y.end() ;)
+    for(auto p_point = sort_x.begin(); p_point != --sort_x.end(); ++p_point)
     {
-//        cout<<"ENTERED: " << point->first << " " << point->second << endl;
 
-        auto eq_x = ++sort_x.find({point->first, point->second});
-        auto eq_y_start = ++sort_y.find({point->first, point->second});
+        auto pair_point = p_point;
+        ++pair_point;
 
-        auto eq_y = eq_y_start;
-
-        int count = 0;
-
-        while(eq_x != sort_x.end() &&  eq_x->first == point->first)
+        vector<Point> normal_points;
+        while(pair_point != --sort_x.end())
         {
-//            cout<<"EQ_X: " << eq_x->first << " " << eq_x->second << endl;
+            Line pair = makeLine(*p_point, *pair_point);
+            Line normal = makeNormal(pair, *p_point);
 
-            eq_y = eq_y_start;
-            while(eq_y != sort_y.end() &&  eq_y->second == point->second)
+            normal_points = findPointsOnNormal(normal, pair_point, sort_x.end());
+
+            for(auto p_normal: normal_points)
             {
-//                cout<<"EQ_Y: " << eq_y->first << " " << eq_y->second << endl;
-                if(sort_x.find({eq_y->first, eq_x->second}) != sort_x.end())
-                {
-                    ++count;
-                }
-                ++eq_y;
+                auto n1 = makeNormal(pair, *pair_point);
+                auto n2 = makeNormal(normal, p_normal);
+                if(isCrossExist(n1, n2, sort_x))
+                    ++general_count;
             }
-            ++eq_x;
+            ++pair_point;
         }
-        point = eq_y;
-        general_count += howManyRectsInARow(count);
+
     }
 
     cout << general_count;
