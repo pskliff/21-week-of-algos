@@ -16,8 +16,8 @@ int howManyRectsInARow(int n) {
 struct CompX {
     bool operator()(const pair<int, int> &a, const pair<int, int> &b) {
         if (a.first == b.first)
-            return a.second > b.second;
-        return a.first > b.first;
+            return a.second < b.second;
+        return a.first < b.first;
     }
 };
 
@@ -26,8 +26,8 @@ struct CompY{
     bool operator()(const pair<int, int> &a, const pair<int, int> &b)
     {
         if(a.second == b.second)
-            return a.first > b.first;
-        return a.second > b.second;
+            return a.first < b.first;
+        return a.second < b.second;
     }
 };
 
@@ -53,28 +53,28 @@ int main()
         sort_y.insert({x, y});
     }
 
-//    for(auto p: sort_x)
-//        cout << p.first << " " << p.second << endl;
-//    cout<<endl;
-//
-//    for(auto p: sort_y)
-//        cout << p.first << " " << p.second << endl;
-//
-//    auto test = sort_y.find({4, 1});
-//    cout<<endl<<test->first << " " << test->second;
-//    ++test;
-//    cout<<endl<<test->first << " " << test->second;
-//    ++test;
-//    cout<<endl<<test->first << " " << test->second;
-//    ++test;
-//    cout<<endl<<test->first << " " << test->second;
+    for(auto p: sort_x)
+        cout << p.first << " " << p.second << endl;
+    cout<<endl;
+
+    for(auto p: sort_y)
+        cout << p.first << " " << p.second << endl;
+
+    auto test = sort_y.find({4, 1});
+    cout<<endl<<test->first << " " << test->second;
+    ++test;
+    cout<<endl<<test->first << " " << test->second;
+    ++test;
+    cout<<endl<<test->first << " " << test->second;
+    ++test;
+    cout<<endl<<test->first << " " << test->second;
 
 
     int general_count = 0;
 
     for(auto point = sort_x.begin(); point != sort_x.end() && point != sort_y.end() ;)
     {
-//        cout<<"ENTERED: " << point->first << " " << point->second << endl;
+        cout<<"ENTERED: " << point->first << " " << point->second << endl;
 
         auto eq_x = ++sort_x.find({point->first, point->second});
         auto eq_y_start = ++sort_y.find({point->first, point->second});
@@ -85,12 +85,12 @@ int main()
 
         while(eq_x != sort_x.end() &&  eq_x->first == point->first)
         {
-//            cout<<"EQ_X: " << eq_x->first << " " << eq_x->second << endl;
-
+            cout<<"EQ_X: " << eq_x->first << " " << eq_x->second << endl;
+            count = 0;
             eq_y = eq_y_start;
             while(eq_y != sort_y.end() &&  eq_y->second == point->second)
             {
-//                cout<<"EQ_Y: " << eq_y->first << " " << eq_y->second << endl;
+                cout<<"EQ_Y: " << eq_y->first << " " << eq_y->second << endl;
                 if(sort_x.find({eq_y->first, eq_x->second}) != sort_x.end())
                 {
                     ++count;
@@ -100,6 +100,9 @@ int main()
             ++eq_x;
             general_count += howManyRectsInARow(count);
         }
+//        if(count == 0)
+//            point = eq_x;
+//        else
         point = eq_y;
     }
 
@@ -107,3 +110,5 @@ int main()
 
 
 }
+//10
+//1 1 1 3 1 4 2 4 3 1 3 3 3 4 4 1 4 4 5 2
