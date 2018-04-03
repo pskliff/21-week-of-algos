@@ -23,7 +23,8 @@
 ## 5>  
 Найти цикл в односвязном списке  
 (O(n) время, O(1) память)  
-[Link](https://leetcode.com/problems/linked-list-cycle/description/)  
+[Easy](https://leetcode.com/problems/linked-list-cycle/description/)  
+[Medium](https://leetcode.com/problems/linked-list-cycle-ii/description/)  
   
 ## 6>  
 Найти Точку пересечения 2х односвязных списков  
