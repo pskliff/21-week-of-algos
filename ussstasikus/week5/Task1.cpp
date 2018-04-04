@@ -8,21 +8,21 @@ int main()
 {
     int n;
     cin >> n;
-    int arr[n];
+    int nums[n];
     for (int i = 0; i < n; ++i) {
-        cin >> arr[i];
+        cin >> nums[i];
     }
 
     int curr_index = 0;
     for (int i = 0; i < n; ++i) {
-        if(arr[i] != 0)
-            arr[curr_index++] = arr[i];
+        if(nums[i] != 0)
+            nums[curr_index++] = nums[i];
     }
     for (int i = curr_index; i < n; ++i) {
-        arr[i] = 0;
+        nums[i] = 0;
     }
 
     for (int i = 0; i < n; ++i) {
-        cout << arr[i];
+        cout << nums[i];
     }
 }
