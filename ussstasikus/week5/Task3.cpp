@@ -17,13 +17,9 @@ int maxLenOfOnes(vector<int> arr)
         {
             n2 = 0;
             int j = i;
-            if(arr[i - 1] != 0)
-            {
+            while (arr[j + 1] != 0 && j + 1 < arr.size()) {
+                n2 += 1;
                 ++j;
-                while (arr[j] != 0 && j < arr.size()) {
-                    n2 += 1;
-                    ++j;
-                }
             }
 
             if(n1 + n2 > n_max)
@@ -37,6 +33,8 @@ int maxLenOfOnes(vector<int> arr)
             ++n1;
         }
     }
+    if(n1 > n_max)
+        n_max = n1 + n2;
     return n_max;
 }
 
