@@ -15,7 +15,7 @@
 Время: O(n); Память: O(1)  
 Пример: "А роза упала на, лапу! Азора%" — Полином  
 "А роза упала на, лапу! Аза%" — не Полином  
-(leetcode)[https://leetcode.com/problems/valid-palindrome/description/]
+[leetcode](https://leetcode.com/problems/valid-palindrome/description/)
   
 ## 5> Уровень — Первая задачка  
 Дан целочисленный неотсортированный массив.  
@@ -36,9 +36,9 @@
 Время: O(nlogn); Память: O(1)  
   
 ## 8> Уровень — Вторая задачка  
-(Сумма подмассива = k)[https://leetcode.com/problems/subarray-sum-equals-k/description/]  
+[Сумма подмассива = k](https://leetcode.com/problems/subarray-sum-equals-k/description/)  
   
 ## 9> Уровень — Первая задачка  
-(Еще полиндромы)[https://leetcode.com/problems/valid-palindrome-ii/description/]  
+[Еще полиндромы](https://leetcode.com/problems/valid-palindrome-ii/description/)  
 
 
