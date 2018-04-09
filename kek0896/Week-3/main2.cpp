@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <set>
 
 using namespace std;
 
@@ -32,23 +33,19 @@ int main()
     int rectN = 0;
     sortingVectors(vect1, vect2);
 
-    for (int i = 0; i < n - 1; ++i)
+    for (int i = 0; i < vect2.size() - 1; ++i)
     {
         int ind1 = i + 1;
         // if point 1 do not match with next
         while ((ind1 < n) && vect1[i].first.first == vect1[ind1++].first.first)
         {
-            // if point 2 does not match
             int ind2 = vect1[ind1 - 1].second;
-            if (ind2 + 1 == n) continue;
 
-            while (vect2[ind2].first.second == vect2[ind2 + 1].first.second)
+            while ((ind2 + 1 < vect2.size()) && vect2[ind2].first.second == vect2[ind2 + 1].first.second)
             {
                 if (find(kek.begin(), kek.end(), pair<int, int>(vect2[ind2 + 1].first.first,
-                                                                vect1[i].first.second)) != kek.end())
-                    rectN++;
+                                                                vect1[i].first.second)) != kek.end()) rectN++;
                 ind2++;
-                if (ind2 + 1 == n) break;
             }
         }
     }
@@ -63,6 +60,10 @@ int main()
 
 // последний индекс - немного костыль, чтобы помнить место точки первого вектора во втором векторе
 void sortingVectors(vector<pair<pair<int, int>, int>>& vect1, vector<pair<pair<int, int>, int>>& vect2){
+
+    // no repetitions please
+    set<pair<pair<int, int>, int>> s( vect2.begin(), vect2.end() );
+    vect2.assign( s.begin(), s.end() );
 
     // sorting by y
     std::sort(vect2.begin(), vect2.end(), [](const pair<pair<int, int>, int>& a, const pair<pair<int, int>, int>& b) {
@@ -83,3 +84,15 @@ void sortingVectors(vector<pair<pair<int, int>, int>>& vect1, vector<pair<pair<i
     });
 
 }
+
+
+// TESTS
+
+//7
+//1 0
+//0 1
+//1 0
+//0 0
+//0 0
+//1 2
+//0 2
