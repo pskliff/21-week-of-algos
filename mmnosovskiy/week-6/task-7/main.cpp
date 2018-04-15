@@ -2,6 +2,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -18,6 +19,9 @@ int main()
         fin >> a[i];
     for (int j = 0; j < m; ++j)
         fin >> b[j];
+
+    sort(a.begin(), a.end());
+    sort(b.begin(), b.end());
 
     size_t i = 0, j = 0, dif = static_cast<size_t>(abs(a[0] - b[0]));
 
