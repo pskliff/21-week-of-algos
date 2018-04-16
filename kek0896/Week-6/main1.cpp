@@ -7,23 +7,20 @@ using namespace std;
 int main()
 {
 
-    // passes ALL tests on that site
-    // well, if you are reading this and know simpler way to do that - write me,
-    // because I'm still sure that I am missing something I can simplify
+    // Accepted
+    // оч заморочено, но за один проход (когда читаю матрицу),
+    // т е храню только текущий элемент матрицы, мин/макс по строкам/столбцам (про вариант без заморочек внизу)
 
     size_t n, m;
-    ifstream fin;
-    fin.open("input.txt");
+    ifstream fin("input.txt");
     fin >> n >> m;
-    vector<int> sums(n + 1);  // I use zero elem as a little kostyl'
-    vector<int> max_in_col(m), min_in_row(n), i_max(m); // i_max keeps indexes of rows last increased sums
-                                                          // (indexes are indexes of columns)
-                                                          // yeah... just look there, may be you'll understand
+    vector<int> sums(n + 1);  // Количества таких элементов по строкам
+    vector<int> max_in_col(m), min_in_row(n), i_max(m); // в i_max индексы последних увеличенных строк по индексу столбца
+
     fill(max_in_col.begin(), max_in_col.end(), -1001);
     fill(min_in_row.begin(), min_in_row.end(), 1001);
 
     int a;
-
     for (int i = 0; i < n; ++i)
     {
         for (int j = 0; j < m; ++j)
@@ -50,13 +47,13 @@ int main()
 
         }
     }
+
     fin.close();
 
     int res = 0;
     for (auto sum : sums) res += sum;
 
-    fstream fout;
-    fout.open("output.txt", ios::out);
+    fstream fout("output.txt", ios::out);
     fout << res;
     fout.close();
 
@@ -79,3 +76,6 @@ int main()
 //2 2 0
 
 //0
+
+// Вариант 2 (без заморочек) - читаю матрицу, сразу считая минимумы/максимумы по строкам/столбцам,
+// а потом все элементы сравнивать с ними (если он и мин и макс счетчик++)
