@@ -39,6 +39,15 @@ also repair task 3 (if you are reading it, please have a look and tell me what's
 
 ***Week's Progress:*** All, but 7th and 9th
 
-***Thoughts:*** **Special attention**  *to tasks 7, 9* — need to be done
+***Thoughts:*** **Special attention**  *to tasks 9* — need to be done
 
 [Link to work](https://github.com/pskliff/21-weeks-of-algos/tree/master/kek0896/Week-5)  
+
+## Week 6 April 9 - April 16 
+
+***Week's Progress:*** All, but handled solution for task 8 is not mine
+ 
+***Thoughts:***  Well, that was fun) 
+
+[Link to work](https://github.com/pskliff/21-weeks-of-algos/tree/master/kek0896/Week-6)  
+
