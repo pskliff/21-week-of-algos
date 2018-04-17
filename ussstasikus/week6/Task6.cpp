@@ -23,9 +23,10 @@ bool isSubstr(const string &a, const string &b)
 
     for (int i = 0; i < sub_size; ++i)
     {
-        if(symbs.find(a[i]) != symbs.end() && symbs[a[i]] != 0)
+        if(symbs.find(a[i]) != symbs.end())
         {
-            ++matched;
+            if (symbs[a[i]] > 0)
+                ++matched;
             symbs[a[i]] -= 1;
         }
         if(matched == sub_size)
@@ -36,16 +37,16 @@ bool isSubstr(const string &a, const string &b)
     {
         if(symbs.find(a[start - 1]) != symbs.end())//восстановление
         {
-            --matched;
+            if(symbs[a[start - 1]] >= 0)
+                --matched;
             symbs[a[start - 1]] += 1;
         }
 
         if(symbs.find(a[start + sub_size - 1]) != symbs.end() )//&& symbs[a[start + sub_size - 1]] != 0)
         {
-            if(symbs[a[start + sub_size - 1]] != 0) {
+            if (symbs[a[start + sub_size - 1]] > 0)
                 ++matched;
-                symbs[a[start + sub_size - 1]] -= 1;
-            }
+            symbs[a[start + sub_size - 1]] -= 1;
         }
 
         if(matched == sub_size)

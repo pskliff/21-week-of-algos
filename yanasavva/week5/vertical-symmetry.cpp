@@ -2,21 +2,22 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
+#include <unordered_map>
 
 using namespace std;
 
-typedef pair<int,int> tPoint;
+typedef pair<int,vector<int>> tPoint;
 
 
-bool check(int left, int right, int sym, vector<tPoint> points);
+bool check(unordered_map<int, vector<int>> points, int av);
 
 int main()
 {
     ifstream fin;
     fin.open("in.txt");
 
-    vector<tPoint> points;
-    int sym;
+    unordered_map<int, vector<int>> points;
+    int sum = 0;
 
     int n;
     double cnt = 0;
@@ -24,42 +25,30 @@ int main()
     for (int i = 0; i < n; ++i) {
         int x,y;
         fin >> x >> y;
-        points.emplace_back(x,y);
+        if (points.find(x) == points.end())
+            points[x] = vector<int>();
+        points[x].emplace_back(y);
+        sum += x;
     }
+    sum /= n;
 
-    //O(nlog(n))
-    sort(points.begin(), points.end());
 
-    int left, right;
-    if (n % 2 == 1)
-    {
-        sym = points[n / 2].first;
-        right = n / 2 + 1;
-    } else
-    {
-        sym = (points.front().first + points.back().first) / 2;
-        right = n / 2;
-    }
-    left = n / 2 - 1;
-
-    bool success = false;
-
-    while(left >= 0)
-    {
-        if ((success = check(left, right, sym, points)))
-            break;
-        --left, ++right;
-    }
-
-    if (success)
-        cout << sym << endl;
+    if (check(points, sum))
+        cout << sum << endl;
     else
         cout << "no symmetry" << endl;
     return 0;
 }
 
-bool check(int left, int right, int sym, vector<tPoint> points)
+bool check(unordered_map<int, vector<int>> points, int av)
 {
-    return sym - points[left].first == points[right].first - sym &&
-           points[left].second == points[right].second;
+    for (auto &point : points)
+    {
+        int delta = 2 * (av - point.first);
+        for (auto &it : point.second)
+            if(find(points[point.first + delta].begin(), points[point.first + delta].end(), it)
+               == points[point.first + delta].end())
+                return false;
+    }
+    return true;
 }
