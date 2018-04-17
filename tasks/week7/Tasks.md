@@ -1,44 +1,41 @@
 ﻿# Week 6 Arrays, search and MORE YANDEX TASKS  
    
-## 1> Easy level
-[Matrix](http://informatics.mccme.ru/mod/statements/view3.php?id=270&chapterid=1427#1)
+## 1> 
+[BinSearch1](http://informatics.mccme.ru/mod/statements/view.php?id=192)
  
 
-## 2> Easy level
-[twoSum](https://leetcode.com/problems/two-sum/description/)
+## 2> 
+[BinSearch2](http://informatics.mccme.ru/mod/statements/view3.php?id=192&chapterid=4)
 
 ## 3> Easy level
-[Duplitates](https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/)
+[BinSearch3](http://informatics.mccme.ru/mod/statements/view3.php?id=192&chapterid=111728)
   
 ## 4> Уровень — Первая задачка  
-Является ли строка полиномом. Строка может иметь разного размера буквы и не буквенные символы, их не нужно учитывать. То есть полином должен быть чисто из букв. Без доп памяти. Макс размер строки 5гб  
-Время: O(n); Память: O(1)  
-Пример: "А роза упала на, лапу! Азора%" — Полиндром  
-"А роза упала на, лапу! Аза%" — не Полиндром  
-[leetcode](https://leetcode.com/problems/valid-palindrome/description/)
+Дано число n. Нужно найти количество нулей в конце в числе n!  
+Пример:  
+3 -> 0
+8 -> 1
+12 -> 2
+29 -> 6
+31-> 7
+[leetcode](https://leetcode.com/problems/factorial-trailing-zeroes/description/)  
+(P.S. За O(logn) по времени)
   
 ## 5> Уровень — Первая задачка  
-Дан целочисленный неотсортированный массив(числа не повторяются).  
-Задача “схлопнуть”  непрерывные отрезки и вернуть полученный массив строк.  
+Дано дерево. Проверить, является ли оно BST  
   
-Пример: [1,2,3,4,5,10,12] -> [‘1-5’, ’10’, ’12’]  
-Время и память: O(n)
+/**  
+ * Definition for a binary tree node.  
+ * struct TreeNode {  
+ *     int val;  
+ *     TreeNode *left;  
+ *     TreeNode *right;  
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}  
+ * };
+ */    
+ 
 
 ## 6> Уровень — Вторая задачка  
-Есть строки t и p, len(t) >= len(p). Надо определить есть ли в строке t подстрока, равная перепутаной строке  
-Пример: abbdсa - это t  
-        bcd - это p  
-        Тут есть такая строка, это bdc  
-Время и память: O(n)  
-
-## 7>  Уровень — Вторая задачка  
-Даны два интовых массива A и B. Найти min(abs(A[i] - B[j])), где i и j какие то индексы  
-Время: O(nlogn); Память: O(1)  
-  
-## 8> Уровень — Вторая задачка  
-[Сумма подмассива = k](https://leetcode.com/problems/subarray-sum-equals-k/description/)  
-  
-## 9> Уровень — Первая задачка  
-[Еще полиндромы](https://leetcode.com/problems/valid-palindrome-ii/description/)  
+[Для разнообразия](https://leetcode.com/problems/is-graph-bipartite/description/)   
 
 
