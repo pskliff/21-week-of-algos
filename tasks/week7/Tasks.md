@@ -23,16 +23,7 @@
   
 ## 5> Уровень — Первая задачка  
 Дано дерево. Проверить, является ли оно BST  
-  
-/**  
- * Definition for a binary tree node.  
- * struct TreeNode {  
- *     int val;  
- *     TreeNode *left;  
- *     TreeNode *right;  
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}  
- * };
- */    
+[leetcode](https://leetcode.com/problems/validate-binary-search-tree/description/)     
  
 
 ## 6> Уровень — Вторая задачка  
