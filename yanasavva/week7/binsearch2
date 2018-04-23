@@ -1,0 +1,39 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+
+    ifstream fin;
+    fin.open("input.txt");
+    long n,k;
+    fin >> n >> k;
+    vector<int> a1(n);
+    vector<int> a2(k);
+
+    for (long i = 0; i < n; ++i) {
+        fin >> a1[i];
+    }
+    for (long i = 0; i < k; ++i) {
+        fin >> a2[i];
+    }
+
+    for (long i = 0; i < k; ++i) {
+        long left = 0, right = n - 1;
+        long ind = 0;
+        while (right - left > 1)
+        {
+            ind = (left + right) / 2;
+            if (a1[ind] > a2[i])
+                right = ind;
+            else left = ind;
+        }
+
+        if (a1[left] == a2[i] || a1[right] == a2[i])
+            cout << "YES" << endl;
+        else cout << "NO" << endl;
+    }
+    return 0;
+}

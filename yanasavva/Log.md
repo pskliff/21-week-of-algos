@@ -32,3 +32,11 @@ Week's Progress: 8.5/9 tasks done
 Thoughts: pay particular attention to task **k-sum** 
 
 Link to work: [week6](https://github.com/yanasavva/21-weeks-of-algos/tree/master/yanasavva/week6)
+
+## Week 7 
+
+Week's Progress: all tasks done
+
+Thoughts: pay particular attention to task **bipartite-gragh** (aka graph coloring)
+
+Link to work: [week7](https://github.com/yanasavva/21-weeks-of-algos/tree/master/yanasavva/week7)
