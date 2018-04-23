@@ -1,56 +1,82 @@
 //
-// Created by Stas Don on 23/03/2018.
+// Created by Stas Don on 21/04/2018.
 //
 
 #include <iostream>
+#include <fstream>
 #include <vector>
-#include <set>
-#include <unordered_set>
 
 using namespace std;
 
+
+int binSearchLeft(int n,  vector<long> array, ofstream &fout)
+{
+    int l = 0, r = array.size() - 1;
+
+    while(r > l)
+    {
+        int middle = (r + l) / 2;
+        if(array[middle] >= n)
+            r = middle - 1;
+        else if(array[middle] < n)
+            l = middle + 1;
+    }
+
+    return array[r] > n ? r - 1 : r;
+}
+
+
+int binSearchRight(int n, vector<long> array, ofstream &fout)
+{
+    int l = 0, r = array.size() - 1;
+
+    while(r > l)
+    {
+        int middle = (r + l) / 2;
+        if(array[middle] > n)
+            r = middle - 1;
+        else if(array[middle] <= n)
+            l = middle + 1;
+    }
+    return array[l] < n ? l + 1 : l;
+}
+
+
+void KNearestNumbers(const vector<long> &a, const vector<long> &b)
+{
+
+    ofstream fout("output.txt");
+    for(auto n: b)
+    {
+        int next  = binSearchLeft(n + 1, a, fout);
+        int prev = binSearchRight(n - 1, a, fout);
+
+        int start = a[prev] == n ? prev : prev + 1;
+        int last = a[next] == n ? next : next - 1;
+
+        if (start >= a.size() || a[start] != n)
+            fout << 0 << endl;
+        else
+            fout << start + 1 << " " << last + 1 << endl;
+    }
+    fout.close();
+}
+
+
 int main()
 {
-    int n;
-    cin >> n;
+    int N, K;
+    ifstream fin("input.txt");
+    fin >> N >> K;
 
-    int number_of_clicks = 0;
+    vector<long> a(N), b(K);
 
-    unordered_set<string> words;
+    for (int i = 0; i < N; ++i)
+        fin >> a[i];
 
-    for (int i = 0; i < n; ++i) {
-        string word;
-        cin>>word;
-        if(words.find(word) == words.end())//если не было такого слова
-        {
-            words.insert(word);
-            number_of_clicks += word.size();
-        }
-        else//если было такое слово
-        {
-            set<int> prefixes;//prefix_len
-            for(auto it: words)
-            {
-                if(it != word)
-                {
-                    int prefix_len = 0;
-                    while(prefix_len < it.size() && prefix_len < word.size() && it[prefix_len] == word[prefix_len])
-                        ++prefix_len;
+    for (int i = 0; i < K; ++i)
+        fin >> b[i];
 
-                    if(prefixes.find(prefix_len) == prefixes.end())
-                        prefixes.insert(prefix_len);
-
-                    if(prefix_len == word.size())
-                        break;
-                }
-            }
-
-            int max_prefix = *(--prefixes.end());
-            if(max_prefix == word.size())
-                number_of_clicks += word.size();
-            else
-                number_of_clicks += max_prefix + 1;
-        }
-    }
-    cout << number_of_clicks;
+    KNearestNumbers(a, b);
+    fin.close();
 }
