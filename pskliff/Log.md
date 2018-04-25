@@ -48,10 +48,11 @@ Week's Progress: Getting ready for Yandex interview
 Done all tasks  
 Actually failed interview  
 
-Thoughts: **Special attention**  
-task 1 has beautiful solution  
-task 6 it was hard to solve without some Stas's help
-task 9 had to get some knowledge about trie
+Thoughts:   
+**Special attention**  
+ task 1 has beautiful solution  
+ task 6 it was hard to solve without some Stas's help
+ task 9 had to get some knowledge about trie
 
 Link to work: [Link to work](https://github.com/pskliff/21-weeks-of-algos/tree/master/pskliff/week5)  
 
@@ -61,11 +62,12 @@ Week's Progress:
 More Yandex tasks from our interviews  
 Done all tasks except 6th
 
-Thoughts: **Special attention**  
-task 2 (twoSum) was hard, but has beautiful solution  
-task 5  Rita broke my solution, need to fix  
-task 6 **some day I will do it**
-task 8 well, you have to remember this solution forever, man
+Thoughts:   
+**Special attention**  
+ task 2 (twoSum) was hard, but has beautiful solution  
+ task 5  Rita broke my solution, need to fix  
+ task 6 **some day I will do it**  
+ task 8 well, you have to remember this solution forever, man
 
 Link to work: [Link to work](https://github.com/pskliff/21-weeks-of-algos/tree/master/pskliff/week6)  
   
@@ -73,9 +75,10 @@ Link to work: [Link to work](https://github.com/pskliff/21-weeks-of-algos/tree/m
 
 Week's Progress: Done all tasks
 
-Thoughts: **Special attention**  
-task 3 (two end binSearch) was hard, try to find beautiful solution  
-task 5 (Valid BST)  Well it was hard too, had to look at solution  
-task 6 (bipartit) Done from the memory, (from week 3)
+Thoughts:   
+**Special attention**  
+ task 3 (two end binSearch) was hard, try to find beautiful solution  
+ task 5 (Valid BST)  Well it was hard too, had to look at solution  
+ task 6 (bipartit) Done from the memory, (from week 3)
 
 Link to work: [Link to work](https://github.com/pskliff/21-weeks-of-algos/tree/master/pskliff/week7)
