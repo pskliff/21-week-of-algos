@@ -1,32 +1,16 @@
-﻿# Week 6 Arrays, search and MORE YANDEX TASKS  
-   
-## 1> 
-[BinSearch1](http://informatics.mccme.ru/mod/statements/view.php?id=192)
- 
+﻿# Week 8 Answer BinSearch  
+
+## 1>     
+[PowerOfThree](https://leetcode.com/problems/power-of-three/description/) 
 
 ## 2> 
-[BinSearch2](http://informatics.mccme.ru/mod/statements/view3.php?id=192&chapterid=4)
-
-## 3> Easy level
-[BinSearch3](http://informatics.mccme.ru/mod/statements/view3.php?id=192&chapterid=111728)
-  
-## 4> Уровень — Первая задачка  
-Дано число n. Нужно найти количество нулей в конце в числе n!  
-Пример:    
-3 -> 0  
-8 -> 1  
-12 -> 2  
-29 -> 6  
-31-> 7  
-[leetcode](https://leetcode.com/problems/factorial-trailing-zeroes/description/)  
-(P.S. За O(logn) по времени)  
-  
-## 5> Уровень — Первая задачка  
-Дано дерево. Проверить, является ли оно BST  
-[leetcode](https://leetcode.com/problems/validate-binary-search-tree/description/)     
+[Diplomas](http://informatics.mccme.ru/mod/statements/view3.php?id=1966&chapterid=1923)
  
 
-## 6> Уровень — Вторая задачка  
-[Для разнообразия](https://leetcode.com/problems/is-graph-bipartite/description/)   
+## 3> 
+[Turtle](http://informatics.mccme.ru/mod/statements/view3.php?id=1966&chapterid=894)  
+  
+    
+   
 
 
