@@ -60,3 +60,11 @@ also repair task 3 (if you are reading it, please have a look and tell me what's
 please write me)
 
 [Link to work](https://github.com/pskliff/21-weeks-of-algos/tree/master/kek0896/Week-7)  
+
+## Week 8 April 23 - April 30
+
+***Week's Progress:*** All \ task 3 (I tryed) ✨
+
+***Thoughts:***  Look on task 3 later - try to understand how freaky turtle eats the stupid dandelions
+
+[Link to work](https://github.com/pskliff/21-weeks-of-algos/tree/master/kek0896/Week-8)  
