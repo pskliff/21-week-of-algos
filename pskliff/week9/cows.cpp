@@ -26,7 +26,7 @@ int countCows(vector<int>& st, int m)
 int binSearch(vector<int>& st)
 {
     int l = 0, r = st[st.size() - 1] - st[0];
-    while(l < r)
+    while(l < r - 1)
     {
         int m = l + (r - l)/2;
         int cnt = countCows(st, m);
@@ -36,6 +36,8 @@ int binSearch(vector<int>& st)
             r = m - 1;
     }
 
+    if(countCows(st, r))
+        return r;
     return l;
 }
 
