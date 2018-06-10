@@ -8,7 +8,7 @@ int n, k;
 int countCows(vector<int>& st, int m)
 {
     int i = 0, j = 0, cnt = 0;
-    while (j < n)
+    while ( j < n) // cnt < (k - 1) &&
     {
         j++;
 
@@ -36,10 +36,13 @@ int binSearch(vector<int>& st)
             r = m - 1;
     }
 
-    if(countCows(st, r))
+    if(countCows(st, r) >= k)
         return r;
     return l;
 }
+
+
+
 
 int main()
 {
